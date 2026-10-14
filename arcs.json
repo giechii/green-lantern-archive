@@ -1,0 +1,48 @@
+{
+  "version": "0.2",
+  "lanes": {
+    "main": "Green Lantern",
+    "corps": "Green Lantern Corps",
+    "dc": "Eventi DC"
+  },
+  "arcs": [
+    {
+      "id": "flashpoint",
+      "title": "Flashpoint",
+      "start": "2011-05-01",
+      "end": "2011-10-01",
+      "lanes": ["main", "dc"],
+      "description": "Grande evento DC che altera la continuità dell'universo DC. La componente Green Lantern comprende i tie-in dedicati a Hal Jordan e Abin Sur.",
+      "series": [
+        {"title": "Flashpoint", "issues": "#1–5", "lane": "dc"},
+        {"title": "Flashpoint: Hal Jordan", "issues": "#1–3", "lane": "main"},
+        {"title": "Flashpoint: Abin Sur – The Green Lantern", "issues": "#1–3", "lane": "main"}
+      ],
+      "characters": ["Hal Jordan", "Abin Sur", "Barry Allen"]
+    },
+    {
+      "id": "twilight-of-the-guardians",
+      "title": "Twilight of the Guardians",
+      "start": "2017-11-01",
+      "end": "2018-01-31",
+      "lanes": ["main"],
+      "description": "Arco di Hal Jordan and the Green Lantern Corps incentrato sui Guardiani e sul conflitto con i Controllers.",
+      "series": [
+        {"title": "Hal Jordan and the Green Lantern Corps", "issues": "#33–36", "lane": "main"}
+      ],
+      "characters": ["Hal Jordan", "John Stewart", "Guy Gardner", "Kyle Rayner", "Ganthet", "Sayd"]
+    },
+    {
+      "id": "last-charge",
+      "title": "Last Charge",
+      "start": "2018-07-11",
+      "end": "2018-08-08",
+      "lanes": ["main"],
+      "description": "Arco conclusivo di Hal Jordan and the Green Lantern Corps. La testata è classificata nella colonna Green Lantern.",
+      "series": [
+        {"title": "Hal Jordan and the Green Lantern Corps", "issues": "#48–50", "lane": "main"}
+      ],
+      "characters": ["Hal Jordan", "John Stewart", "Guy Gardner", "Kyle Rayner"]
+    }
+  ]
+}
