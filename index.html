@@ -1,0 +1,8 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lanterna Verde Archive v0.4</title><link rel="stylesheet" href="style.css"></head><body>
+<header><div class="brand">✦ <strong>Lanterna Verde Archive</strong></div><nav><a href="#timeline">Timeline</a><a href="#database">Database</a></nav></header>
+<section class="hero"><p>THE GREEN LANTERN ARCHIVE</p><h1>La storia di<br><span>Lanterna Verde</span></h1><div>Una cronologia sincronizzata, alimentata dal database degli story arc.</div><a href="#timeline">Esplora la timeline</a></section>
+<section class="controls" id="timeline"><div class="heading"><div><small>CRONOLOGIA</small><h2>Le storie di Green Lantern</h2></div><label><input type="checkbox" id="allAges"> Mostra anche le epoche precedenti</label></div><div id="laneControls"></div><input id="search" placeholder="Cerca arco, personaggio, testata…"></section>
+<main id="timelineList"><div class="loading">Caricamento del database…</div></main>
+<section class="info" id="database"><small>DATABASE</small><h2>La timeline viene dai dati.</h2><p>Gli archi non sono più inseriti direttamente nel codice: il sito legge <b>arcs.json</b>. Per aggiungere un arco basta aggiornare il database.</p></section>
+<footer>Lanterna Verde Archive · Prototipo v0.4</footer>
+<dialog id="dialog"><button id="close">×</button><div id="dialogContent"></div></dialog><script src="app.js"></script></body></html>
