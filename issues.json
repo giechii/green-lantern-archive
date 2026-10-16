@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "issues": [
+    {
+      "id": "green-lantern-2011-001",
+      "series": "Green Lantern",
+      "volumeYear": 2011,
+      "number": "1",
+      "title": "Sinestro, Part One",
+      "cover": "https://static.dc.com/dc/files/default_images/glantern_v5_1_5b158554ca8fd2.65519150.jpg?w=160",
+      "releaseDate": "2011-09-14",
+      "arcId": "sinestro",
+      "writer": [
+        "Geoff Johns"
+      ],
+      "penciller": [
+        "Doug Mahnke"
+      ],
+      "characters": [
+        "Hal Jordan",
+        "Sinestro",
+        "Carol Ferris",
+        "Ganthet",
+        "Guardians of the Universe",
+        "Arkillo",
+        "Low",
+        "Slushh",
+        "Gary",
+        "Charlie",
+        "Pandora"
+      ],
+      "summary": "On Oa, the Guardians allow Sinestro to wield a Green Lantern ring again, despite Ganthet’s doubts. Meanwhile, Hal Jordan is stranded on Earth without his ring and struggles to keep his life together. After a misunderstanding involving Carol Ferris, he returns home to find an eviction notice. On Korugar, Sinestro discovers that the Sinestro Corps has enslaved the people he once ruled. He kills a disobedient Corps member and destroys the soldier’s yellow ring. Realizing his former followers have become a threat to his homeworld, Sinestro travels to Earth and finds Hal. He offers to restore Hal’s ring—but only if Hal agrees to follow his orders."
+    }
+  ]
+}
