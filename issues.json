@@ -221,7 +221,7 @@
       "volumeYear": 2011,
       "number": "9",
       "title": "The Secret of the Indigo Tribe, Part Three",
-      "cover": "https://static.dc.com/dc/files/default_images/glantern_v5_9_5b15859b6b5e16.15994873.jpg?w=160",
+      "cover": "https://static.dc.com/dc/files/default_images/glantern_v5_9_5b1585990c16b9.18574829.jpg?w=160",
       "releaseDate": "2012-05-09",
       "arcId": "secret-of-the-indigo-tribe",
       "writer": [
@@ -243,6 +243,94 @@
         "Ganthet"
       ],
       "summary": "<p>Hal Jordan and Sinestro uncover <b>the horrifying truth behind the Indigo Tribe and its connection to Abin Sur</b>. The Tribe's apparent empathy is tied to a darker history, changing the way Hal understands the indigo light and the people who wield it.</p><p>The revelations connect the Tribe to events from Abin Sur's past and to the mysterious figure who helped shape it. Meanwhile, on Oa, <b>the Guardians begin their plan to replace the Green Lantern Corps</b>. Their willingness to pursue that goal at any cost shows that the danger facing the Corps is not limited to the Indigo homeworld.</p>"
+    },
+    {
+      "id": "green-lantern-2011-010",
+      "series": "Green Lantern",
+      "volumeYear": 2011,
+      "number": "10",
+      "title": "The Secret of the Indigo Tribe, Part Four",
+      "cover": "https://static.dc.com/dc/files/default_images/glantern_v5_10_5b1585a0962872.60636359.jpg?w=160",
+      "releaseDate": "2012-06-13",
+      "arcId": "secret-of-the-indigo-tribe",
+      "writer": [
+        "Geoff Johns"
+      ],
+      "penciller": [
+        "Doug Mahnke",
+        "Christian Alamy"
+      ],
+      "characters": [
+        "Hal Jordan",
+        "Sinestro",
+        "Indigo-1",
+        "Indigo Tribe",
+        "Black Hand",
+        "Abin Sur",
+        "Guardians of the Universe",
+        "Ganthet"
+      ],
+      "summary": "<p><b>The truth about the Indigo Tribe comes into focus</b> as Hal and Sinestro learn more about its origins and its connection to Abin Sur. The Tribe's outward compassion conceals a disturbing history, forcing Hal to reconsider what he thought he knew about the indigo light and the people who wield it.</p><p>At the same time, the Guardians' scheme to create a replacement for the Green Lantern Corps continues to advance. The issue closes the Indigo Tribe storyline while setting up a dramatic shift in the wider saga: <b>the next threat will grow from the Guardians' actions</b> and from the dangerous forces now moving around Hal and Sinestro.</p>"
+    },
+    {
+      "id": "green-lantern-2011-011",
+      "series": "Green Lantern",
+      "volumeYear": 2011,
+      "number": "11",
+      "title": "The Revenge of Black Hand, Part One",
+      "cover": "https://static.dc.com/dc/files/default_images/glantern_v5_11_5b1585a91df519.96874456.jpg?w=160",
+      "releaseDate": "2012-07-25",
+      "arcId": "revenge-of-black-hand",
+      "writer": [
+        "Geoff Johns"
+      ],
+      "penciller": [
+        "Doug Mahnke",
+        "Christian Alamy"
+      ],
+      "characters": [
+        "Hal Jordan",
+        "Sinestro",
+        "Black Hand",
+        "Indigo Tribe",
+        "Indigo-1",
+        "Guardians of the Universe",
+        "Ganthet",
+        "John Stewart",
+        "Guy Gardner",
+        "Atrocitus",
+        "Simon Baz"
+      ],
+      "summary": "<p><b>Black Hand takes center stage in a new and deeply personal threat.</b> His connection to death and the Black Lantern legacy makes him dangerous in ways that go beyond a conventional fight, while Hal Jordan and Sinestro are drawn toward another crisis just as the Guardians' plans continue to undermine the Corps.</p><p>The story broadens its focus to other Lanterns and hints that the coming conflict will have consequences far beyond Hal's immediate circle. Black Hand's return marks the beginning of an arc built around death, obsession, and the lengths to which the heroes will go to stop him.</p>"
+    },
+    {
+      "id": "green-lantern-2011-012",
+      "series": "Green Lantern",
+      "volumeYear": 2011,
+      "number": "12",
+      "title": "The Revenge of Black Hand, Part Two",
+      "cover": "https://static.dc.com/dc/files/default_images/glantern_v5_12_5b1585b18ca223.34958529.jpg?w=160",
+      "releaseDate": "2012-08-15",
+      "arcId": "revenge-of-black-hand",
+      "writer": [
+        "Geoff Johns"
+      ],
+      "penciller": [
+        "Doug Mahnke",
+        "Mark Irwin"
+      ],
+      "characters": [
+        "Hal Jordan",
+        "Sinestro",
+        "Black Hand",
+        "Indigo Tribe",
+        "Indigo-1",
+        "Atrocitus",
+        "Guy Gardner",
+        "Guardians of the Universe",
+        "Ganthet"
+      ],
+      "summary": "<p><b>Black Hand has been freed from the Indigo Tribe and is more powerful than before.</b> His release turns the threat into an urgent race for Hal Jordan and Sinestro, who must discover what he intends to do before his obsession with death unleashes a wider catastrophe.</p><p>As the two uneasy allies pursue him, they face an enemy whose powers and motives are unlike those of their usual opponents. Meanwhile, the Green Lantern Corps remains vulnerable to the Guardians' secret agenda. <b>The conflict with Black Hand is only beginning</b>, and its consequences will push Hal and Sinestro toward increasingly desperate choices.</p>"
     }
   ]
 }
