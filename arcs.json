@@ -112,6 +112,33 @@
         "Arkillo",
         "Pandora"
       ]
+    },
+    {
+      "id": "secret-of-the-indigo-tribe",
+      "title": "The Secret of the Indigo Tribe",
+      "start": "2012-03-14",
+      "end": "2012-06-13",
+      "lanes": [
+        "main"
+      ],
+      "description": "Hal Jordan and Sinestro investigate the Indigo Tribe and uncover its origins and connection to Abin Sur, while the Guardians advance their plan to replace the Green Lantern Corps.",
+      "series": [
+        {
+          "title": "Green Lantern",
+          "issues": "#7–10",
+          "lane": "main"
+        }
+      ],
+      "characters": [
+        "Hal Jordan",
+        "Sinestro",
+        "Indigo-1",
+        "Indigo Tribe",
+        "Abin Sur",
+        "Black Hand",
+        "Guardians of the Universe",
+        "Ganthet"
+      ]
     }
   ]
 }
