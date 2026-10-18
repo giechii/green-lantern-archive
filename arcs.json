@@ -139,6 +139,34 @@
         "Guardians of the Universe",
         "Ganthet"
       ]
+    },
+    {
+      "id": "revenge-of-black-hand",
+      "title": "The Revenge of Black Hand",
+      "start": "2012-07-25",
+      "end": "2012-08-15",
+      "lanes": [
+        "main"
+      ],
+      "description": "Black Hand returns with greater power after being freed from the Indigo Tribe. Hal Jordan and Sinestro face a new threat tied to death and the wider plans unfolding around the Green Lantern Corps.",
+      "series": [
+        {
+          "title": "Green Lantern",
+          "issues": "#11–12",
+          "lane": "main"
+        }
+      ],
+      "characters": [
+        "Hal Jordan",
+        "Sinestro",
+        "Black Hand",
+        "Indigo Tribe",
+        "Indigo-1",
+        "Guardians of the Universe",
+        "Ganthet",
+        "Atrocitus",
+        "Guy Gardner"
+      ]
     }
   ]
 }
