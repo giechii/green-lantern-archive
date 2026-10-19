@@ -144,15 +144,15 @@
       "id": "revenge-of-black-hand",
       "title": "The Revenge of Black Hand",
       "start": "2012-07-25",
-      "end": "2012-08-15",
+      "end": "2012-08-29",
       "lanes": [
         "main"
       ],
-      "description": "The Indigo Tribe releases Sinestro from its control and places him under Hal Jordan’s custody, with the two rings’ control reversed so Hal can shut off Sinestro’s power. Meanwhile, Black Hand escapes the Tribe by killing himself and returning from the dead; he resurrects his family and plans to turn the living into the undead so he will no longer be alone. Hal and Sinestro track the growing threat, while the Guardians move against Sinestro and the Indigo Tribe prepares to challenge them.",
+      "description": "Hal Jordan and Sinestro discover Black Hand’s plan to spread undeath, while the Indigo Tribe tries to force Sinestro to experience compassion. Black Hand escapes death, resurrects his family and seeks to turn the living into the dead. In the oversized annual, Hal and Sinestro confront Black Hand and his army of the dead, but the Guardians intervene: they reveal the imprisoned First Lantern, seize his power, and use Black Hand as part of their plan. The annual concludes the Black Hand story and directly sets up the Guardians’ creation of the Third Army.",
       "series": [
         {
           "title": "Green Lantern",
-          "issues": "#11–12",
+          "issues": "#11–12, Annual #1",
           "lane": "main"
         }
       ],
@@ -166,6 +166,46 @@
         "Ganthet",
         "Atrocitus",
         "Guy Gardner"
+      ]
+    },
+    {
+      "id": "the-new-normal",
+      "title": "The New Normal",
+      "start": "2012-09-05",
+      "end": "2012-09-05",
+      "lanes": [
+        "main"
+      ],
+      "description": "A new human Green Lantern enters the scene: Simon Baz, an Arab-American mechanic and former car thief who is wrongly suspected of terrorism after a stolen van containing a bomb is found. While in FBI custody, a Green Lantern ring chooses him. His origin runs parallel to the aftermath of Hal Jordan and Sinestro’s disappearance into the Dead Zone, setting up the next phase of the series.",
+      "series": [
+        {
+          "title": "Green Lantern",
+          "issues": "#0",
+          "lane": "main"
+        }
+      ]
+    },
+    {
+      "id": "rise-of-the-third-army",
+      "title": "Rise of the Third Army",
+      "start": "2012-10-03",
+      "end": "2013-01-23",
+      "lanes": [
+        "main",
+        "dc"
+      ],
+      "description": "The Guardians begin putting their plan into action: using the power of the First Lantern, they create the Third Army, a growing force of emotionless beings that assimilates living people and spreads across the universe. With Hal Jordan and Sinestro trapped in the Dead Zone, the newly chosen Simon Baz must prove he deserves his ring while being treated as a terrorist and hunted by authorities. The Green Lantern issues follow Simon’s first encounters with the Justice League and the growing Third Army threat, while the wider crossover follows John Stewart, Guy Gardner, Kyle Rayner and the other Lantern Corps as the Guardians turn against their own creation, the Green Lantern Corps.",
+      "series": [
+        {
+          "title": "Green Lantern",
+          "issues": "#13–16",
+          "lane": "main"
+        },
+        {
+          "title": "Rise of the Third Army",
+          "issues": "Crossover event",
+          "lane": "dc"
+        }
       ]
     }
   ]
