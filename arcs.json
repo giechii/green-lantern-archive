@@ -183,13 +183,22 @@
           "issues": "#0",
           "lane": "main"
         }
+      ],
+      "characters": [
+        "Simon Baz",
+        "Hal Jordan",
+        "Sinestro",
+        "Amanda Waller",
+        "Batman",
+        "Cyborg",
+        "FBI"
       ]
     },
     {
       "id": "rise-of-the-third-army",
       "title": "Rise of the Third Army",
       "start": "2012-10-03",
-      "end": "2013-01-23",
+      "end": "2013-03-13",
       "lanes": [
         "main",
         "dc"
@@ -202,10 +211,33 @@
           "lane": "main"
         },
         {
-          "title": "Rise of the Third Army",
-          "issues": "Crossover event",
+          "title": "Green Lantern Corps",
+          "issues": "#13–16, Annual #1",
+          "lane": "corps"
+        },
+        {
+          "title": "Green Lantern: New Guardians",
+          "issues": "#13–16",
+          "lane": "dc"
+        },
+        {
+          "title": "Red Lanterns",
+          "issues": "#13–16",
           "lane": "dc"
         }
+      ],
+      "characters": [
+        "Simon Baz",
+        "Hal Jordan",
+        "Sinestro",
+        "John Stewart",
+        "Guy Gardner",
+        "Kyle Rayner",
+        "Atrocitus",
+        "Larfleeze",
+        "Guardians of the Universe",
+        "First Lantern",
+        "Third Army"
       ]
     }
   ]
