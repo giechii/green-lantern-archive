@@ -3,7 +3,8 @@
   "lanes": {
     "main": "Green Lantern",
     "corps": "Green Lantern Corps",
-    "dc": "Eventi DC"
+    "dc": "Eventi DC",
+    "lanterns": "Lanterns Universe"
   },
   "arcs": [
     {
@@ -238,6 +239,31 @@
         "Guardians of the Universe",
         "First Lantern",
         "Third Army"
+      ]
+    },
+    {
+      "id": "blood-and-rage",
+      "title": "Blood and Rage",
+      "start": "2011-09-14",
+      "end": "2012-03-07",
+      "lanes": [
+        "lanterns"
+      ],
+      "description": "Atrocitus tries to turn the Red Lantern Corps into a deliberate instrument of vengeance, while Bleez’s ambitions and the arrival of the first human Red Lantern, Rankorr, challenge his control. Across the opening seven issues, the series explores the Corps’ brutal origins and internal tensions, setting up the larger conflict that will threaten the Red Lanterns.",
+      "series": [
+        {
+          "title": "Red Lanterns",
+          "issues": "#1–7",
+          "lane": "lanterns"
+        }
+      ],
+      "characters": [
+        "Atrocitus",
+        "Bleez",
+        "Rankorr (John Moore)",
+        "Dex-Starr",
+        "Red Lantern Corps",
+        "Guy Gardner"
       ]
     }
   ]
