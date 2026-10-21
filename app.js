@@ -4,8 +4,51 @@ async function load(){try{const responses=await Promise.all([fetch("arcs.json",{
 function controls(){$("#laneControls").innerHTML=Object.entries(db.lanes).map(([id,n])=>'<button class="lane '+(active.has(id)?"active":"")+'" data-l="'+id+'"><span>●</span> <b>'+n+'</b><small>'+(id==="main"?"Serie principale":id==="corps"?"Corpo delle Lanterne":id==="dc"?"Eventi e crossover":"Lanterne rosse e altre linee")+'</small></button>').join("");document.querySelectorAll(".lane").forEach(b=>b.onclick=()=>{let l=b.dataset.l;if(active.has(l)){if(active.size>1)active.delete(l)}else active.add(l);b.classList.toggle("active",active.has(l));render()})}
 $("#allAges").onchange=render;$("#search").oninput=render;function yr(s){return new Date(s).getUTCFullYear()}function yearFraction(s){const d=new Date(s+"T00:00:00Z"),n=d.getUTCFullYear(),a=Date.UTC(n,0,1),b=Date.UTC(n+1,0,1);return n+(d.getTime()-a)/(b-a)}function y(n){return H+(MAX-n)*PY}function yDate(s){return H+(MAX-yearFraction(s))*PY}
 function render(){if(!db)return;let q=$("#search").value.toLowerCase(),old=$("#allAges").checked,lanes=["main","corps","lanterns","dc"].filter(l=>active.has(l)),arr=db.arcs.filter(a=>a.lanes.some(l=>active.has(l))&&(old||yr(a.start)>=2000)&&(!q||JSON.stringify(a).toLowerCase().includes(q)||issues.some(i=>i.arcId===a.id&&JSON.stringify(i).toLowerCase().includes(q)))),s='<div class="timeline" style="grid-template-columns:repeat('+lanes.length+',minmax(0,1fr))">';lanes.forEach((l,index)=>s+='<div class="axis" style="left:calc('+((index+0.5)*100/lanes.length)+'% - 1px)"></div>');lanes.forEach(l=>{s+='<section class="column '+l+'"><h3>'+db.lanes[l]+'</h3>';arr.filter(a=>a.lanes.includes(l)).forEach(a=>{let sy=yr(a.start),ey=yr(a.end),shared=a.lanes.length>1?'<div class="shared">Arco condiviso · '+a.lanes.length+' linee</div>':"",firstCover=issues.filter(i=>i.arcId===a.id&&i.cover).sort((x,y)=>x.releaseDate.localeCompare(y.releaseDate)||Number(x.number)-Number(y.number))[0],cover=firstCover?'<img class="arc-cover" src="'+firstCover.cover+'" alt="Copertina di '+firstCover.series+' #'+firstCover.number+'" loading="lazy">':"";s+='<article data-arc="'+a.id+'" class="arc'+(cover?" has-cover":"")+'" onclick="openArc(&quot;'+a.id+'&quot;)">'+cover+'<div class="date">'+sy+(ey!==sy?"–"+ey:"")+'</div><h4>'+a.title+'</h4><p>'+a.description+'</p><div class="count">'+a.series.map(x=>x.title+" "+x.issues).join(" · ")+'</div>'+shared+'</article>'});s+='</section>'});$("#timelineList").innerHTML=s+'</div>';layoutTimeline(arr);}
-function layoutTimeline(arr){const t=document.querySelector(".timeline");if(!t)return;const cards=[...t.querySelectorAll("[data-arc]")],byId=new Map();for(const card of cards){const id=card.dataset.arc;if(!byId.has(id))byId.set(id,[]);byId.get(id).push(card);}const bottoms=Object.fromEntries(["main","corps","lanterns","dc"].map(l=>[l,H])),labels=[];let cursor=H;const years=[...new Set(arr.map(a=>yr(a.start)))].sort((a,b)=>b-a);for(const year of years){const group=arr.filter(a=>yr(a.start)===year).sort((a,b)=>b.start.localeCompare(a.start)||a.title.localeCompare(b.title));let groupBottom=cursor;for(const a of group){const groupCards=byId.get(a.id)||[],lanes=a.lanes.filter(l=>active.has(l));if(!groupCards.length||!lanes.length)continue;const top=Math.max(cursor,...lanes.map(l=>bottoms[l])),h=Math.max(...groupCards.map(card=>card.getBoundingClientRect().height));groupCards.forEach(card=>card.style.top=top+"px");for(const l of lanes)bottoms[l]=top+h+14;groupBottom=Math.max(groupBottom,...lanes.map(l=>bottoms[l]));cursor=top+h+14;}cursor=Math.max(cursor,groupBottom)+34;labels.push({year,top:groupBottom+4});}t.querySelectorAll(".year").forEach(e=>e.remove());for(const item of labels){const e=document.createElement("div");e.className="year";e.style.top=item.top+"px";e.innerHTML="<span>"+item.year+"</span>";t.appendChild(e);}t.style.height=(cursor+50)+"px";}
-function packTimeline(arr){const timeline=document.querySelector(".timeline");if(!timeline)return;const bottoms={main:-Infinity,corps:-Infinity,dc:-Infinity,lanterns:-Infinity};const ordered=[...arr].sort((a,b)=>b.start.localeCompare(a.start)||b.end.localeCompare(a.end)||a.title.localeCompare(b.title));let maxBottom=timeline.clientHeight;for(const a of ordered){const cards=[...timeline.querySelectorAll('[data-arc="'+a.id+'"]')];if(!cards.length)continue;const target=yDate(a.end);let top=target;for(const lane of a.lanes)if(active.has(lane))top=Math.max(top,(bottoms[lane]===-Infinity?target:bottoms[lane]+14));const cardHeight=Math.max(...cards.map(c=>c.getBoundingClientRect().height));cards.forEach(c=>c.style.top=top+"px");for(const lane of a.lanes)if(active.has(lane))bottoms[lane]=top+cardHeight;maxBottom=Math.max(maxBottom,top+cardHeight+40);}timeline.style.height=maxBottom+"px";}
+function layoutTimeline(arr){
+ const t=document.querySelector(".timeline");
+ if(!t)return;
+ const cards=[...t.querySelectorAll("[data-arc]")],byId=new Map();
+ for(const card of cards){
+  const id=card.dataset.arc;
+  if(!byId.has(id))byId.set(id,[]);
+  byId.get(id).push(card);
+ }
+ t.querySelectorAll(".year").forEach(e=>e.remove());
+ const labels=[];
+ let cursor=0;
+ const years=[...new Set(arr.map(a=>yr(a.start)))].sort((a,b)=>b-a);
+ for(const year of years){
+  const group=arr.filter(a=>yr(a.start)===year).sort((a,b)=>b.start.localeCompare(a.start)||a.title.localeCompare(b.title));
+  const yearStart=cursor;
+  for(const a of group){
+   const groupCards=byId.get(a.id)||[];
+   if(!groupCards.length)continue;
+   // Measure every copy after the cards have been rendered; use the tallest copy
+   // so a crossover has one common top and enough vertical room in every column.
+   const h=Math.ceil(Math.max(...groupCards.map(card=>Math.max(card.getBoundingClientRect().height,card.scrollHeight+2))));
+   groupCards.forEach(card=>{
+    card.style.top=cursor+"px";
+    card.style.height=h+"px";
+    card.style.zIndex="1";
+   });
+   cursor+=h+24;
+  }
+  if(cursor>yearStart){
+   labels.push({year,top:70+cursor-12});
+   cursor+=28;
+  }
+ }
+ for(const item of labels){
+  const e=document.createElement("div");
+  e.className="year";
+  e.style.top=item.top+"px";
+  e.style.zIndex="0";
+  e.innerHTML="<span>"+item.year+"</span>";
+  t.appendChild(e);
+ }
+ // The columns start below the timeline's 70px header padding.
+ t.style.height=(70+cursor+40)+"px";
+}function packTimeline(arr){const timeline=document.querySelector(".timeline");if(!timeline)return;const bottoms={main:-Infinity,corps:-Infinity,dc:-Infinity,lanterns:-Infinity};const ordered=[...arr].sort((a,b)=>b.start.localeCompare(a.start)||b.end.localeCompare(a.end)||a.title.localeCompare(b.title));let maxBottom=timeline.clientHeight;for(const a of ordered){const cards=[...timeline.querySelectorAll('[data-arc="'+a.id+'"]')];if(!cards.length)continue;const target=yDate(a.end);let top=target;for(const lane of a.lanes)if(active.has(lane))top=Math.max(top,(bottoms[lane]===-Infinity?target:bottoms[lane]+14));const cardHeight=Math.max(...cards.map(c=>c.getBoundingClientRect().height));cards.forEach(c=>c.style.top=top+"px");for(const lane of a.lanes)if(active.has(lane))bottoms[lane]=top+cardHeight;maxBottom=Math.max(maxBottom,top+cardHeight+40);}timeline.style.height=maxBottom+"px";}
 function openArc(id){let a=db.arcs.find(x=>x.id===id),lan=a.lanes.map(x=>db.lanes[x]).join(" · "),ser=a.series.map(x=>'<li><b>'+x.title+'</b> — '+x.issues+' ('+db.lanes[x.lane]+')</li>').join(""),related=issues.filter(i=>i.arcId===a.id),issueHtml=related.length?'<h3 class="issue-heading">Albi catalogati</h3>'+related.map(i=>'<button class="issue-row" onclick="openIssue(\''+i.id+'\')">'+(i.cover?'<img src="'+i.cover+'" alt="Cover '+i.series+' #'+i.number+'">':'')+'<span><b>'+i.series+' #'+i.number+'</b><small>'+i.title+' · '+i.releaseDate+'</small></span><span>Apri →</span></button>').join(""):"";$("#dialogContent").innerHTML='<div class="detail"><div class="date">'+a.start.slice(0,4)+'–'+a.end.slice(0,4)+' · '+lan+'</div><h2>'+a.title+'</h2><p>'+a.description+'</p><b>Serie e albi coinvolti</b><ul>'+ser+'</ul><p><b>Personaggi:</b> '+(a.characters||[]).join(", ")+'</p>'+issueHtml+'</div>';$("#dialog").showModal()}
 function openIssue(id){const i=issues.find(x=>x.id===id);if(!i)return;const a=db.arcs.find(x=>x.id===i.arcId);const seriesIssues=issues.filter(x=>x.series===i.series).sort((x,y)=>x.releaseDate.localeCompare(y.releaseDate)||Number(x.number)-Number(y.number));const index=seriesIssues.findIndex(x=>x.id===i.id),prev=seriesIssues[index-1],next=seriesIssues[index+1];const nav='<div class="issue-navigation"><button '+(prev?'onclick="openIssue(&quot;'+prev.id+'&quot;)"':'disabled')+' aria-label="Albo precedente">← Precedente'+(prev?' · #'+prev.number:'')+'</button><button '+(next?'onclick="openIssue(&quot;'+next.id+'&quot;)"':'disabled')+' aria-label="Albo successivo">Successivo'+(next?' · #'+next.number:'')+' →</button></div>';$("#dialogContent").innerHTML='<div class="detail issue-detail"><button class="back-arc" onclick="openArc(&quot;'+i.arcId+'&quot;)">← Torna all’arco '+(a?a.title:"")+'</button><div class="issue-layout">' +(i.cover?'<img class="issue-cover" src="'+i.cover+'" alt="Cover '+i.series+' #'+i.number+'">':'') + '<div><div class="date">'+i.releaseDate+'</div><h2>'+i.series+' #'+i.number+'</h2><h3>'+i.title+'</h3><p><b>Story arc:</b> '+(a?a.title:"")+'</p><p><b>Writer:</b> '+(i.writer||[]).join(", ")+'</p><p><b>Penciller:</b> '+(i.penciller||[]).join(", ")+'</p><p><b>Characters:</b> '+(i.characters||[]).join(", ")+'</p></div></div>'+nav+'<h3>Detailed summary</h3><div class="summary-text">'+i.summary+'</div></div>'}
 $("#close").onclick=()=>$("#dialog").close();$("#dialog").addEventListener("click",event=>{if(event.target===$("#dialog"))$("#dialog").close()});load();
