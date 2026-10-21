@@ -265,6 +265,33 @@
         "Red Lantern Corps",
         "Guy Gardner"
       ]
+    },
+    {
+      "id": "fearsome",
+      "title": "Fearsome",
+      "start": "2011-09-21",
+      "end": "2012-03-21",
+      "lanes": [
+        "corps"
+      ],
+      "description": "Guy Gardner and John Stewart lead a squad of Green Lanterns against the Keepers, a mysterious species whose technology can neutralize power rings and whose raids consume entire worlds. When John and Vandor are captured, Guy assembles a brutal, unconventional rescue team and ventures into the enemy’s dimension. The mission exposes the Keepers’ horrific purpose, costs the Corps lives, and leaves John carrying the burden of bringing a fallen Lantern home.",
+      "series": [
+        {
+          "title": "Green Lantern Corps",
+          "issues": "#1–7",
+          "lane": "corps"
+        }
+      ],
+      "characters": [
+        "Guy Gardner",
+        "John Stewart",
+        "Vandor",
+        "Kirrt Kallak",
+        "The Keepers",
+        "Hannu",
+        "Isamot Kol",
+        "Kilowog"
+      ]
     }
   ]
 }
