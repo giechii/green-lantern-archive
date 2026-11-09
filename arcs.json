@@ -292,6 +292,59 @@
         "Isamot Kol",
         "Kilowog"
       ]
+    },
+    {
+      "id": "wrath-of-the-first-lantern",
+      "title": "The Wrath of the First Lantern",
+      "start": "2013-02-20",
+      "end": "2013-05-22",
+      "lanes": [
+        "main",
+        "corps",
+        "lanterns",
+        "dc"
+      ],
+      "description": "With the Third Army destroyed, the freed First Lantern Volthoom begins feeding on the emotions of the universe and reshaping reality to torment the Lanterns. His experiments force Guy Gardner, John Stewart, Kyle Rayner, Carol Ferris, Saint Walker, Larfleeze and Atrocitus to confront painful alternate lives. Simon Baz discovers the fate of Hal Jordan and Sinestro in the Dead Zone, while Volthoom destroys Korugar and gains immense power. The Lanterns unite for a final battle: Hal returns as a Black Lantern, Sinestro reclaims the yellow light and Kyle's allies combine their powers to defeat Volthoom. The Guardians' rule ends, the Corps faces rebuilding, and each surviving Lantern must deal with the personal cost of victory.",
+      "series": [
+        {
+          "title": "Green Lantern",
+          "issues": "#17–20",
+          "lane": "main"
+        },
+        {
+          "title": "Green Lantern Corps",
+          "issues": "#17–20",
+          "lane": "corps"
+        },
+        {
+          "title": "Green Lantern: New Guardians",
+          "issues": "#17–20",
+          "lane": "lanterns"
+        },
+        {
+          "title": "Red Lanterns",
+          "issues": "#17–20",
+          "lane": "lanterns"
+        }
+      ],
+      "characters": [
+        "Volthoom",
+        "Hal Jordan",
+        "Sinestro",
+        "Simon Baz",
+        "Guy Gardner",
+        "John Stewart",
+        "Kyle Rayner",
+        "Carol Ferris",
+        "Atrocitus",
+        "Saint Walker",
+        "Larfleeze",
+        "Black Hand",
+        "Guardians of the Universe",
+        "Mogo",
+        "Fatality",
+        "B'dg"
+      ]
     }
   ]
 }
