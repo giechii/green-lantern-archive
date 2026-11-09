@@ -8,47 +8,60 @@ function layoutTimeline(arr){
  const t=document.querySelector(".timeline");
  if(!t)return;
  const cards=[...t.querySelectorAll("[data-arc]")],byId=new Map();
- for(const card of cards){
-  const id=card.dataset.arc;
-  if(!byId.has(id))byId.set(id,[]);
-  byId.get(id).push(card);
+ for(const card of cards){const id=card.dataset.arc;if(!byId.has(id))byId.set(id,[]);byId.get(id).push(card)}
+ t.querySelectorAll(".year,.month-mark").forEach(e=>e.remove());
+ const firstDate=new Map();
+ for(const a of arr){
+  const first=issues.filter(i=>i.arcId===a.id&&i.releaseDate).sort((x,y)=>x.releaseDate.localeCompare(y.releaseDate))[0];
+  firstDate.set(a.id,first?first.releaseDate:a.start);
  }
- t.querySelectorAll(".year").forEach(e=>e.remove());
- const labels=[];
- let cursor=0;
- const years=[...new Set(arr.map(a=>yr(a.start)))].sort((a,b)=>b-a);
- for(const year of years){
-  const group=arr.filter(a=>yr(a.start)===year).sort((a,b)=>b.start.localeCompare(a.start)||a.title.localeCompare(b.title));
-  const yearStart=cursor;
+ const monthKey=s=>s.slice(0,7);
+ const months=[...new Set(arr.map(a=>monthKey(firstDate.get(a.id))))].sort((a,b)=>b.localeCompare(a));
+ if(!months.length){t.style.height="180px";return}
+ const latest=months[0],latestIndex=Number(latest.slice(0,4))*12+Number(latest.slice(5,7))-1;
+ const MONTH_PX=36,GAP=24,HEADER=70;
+ const bottoms={main:-Infinity,corps:-Infinity,dc:-Infinity,lanterns:-Infinity};
+ const monthTops=new Map(),yearTops=new Map();
+ let extra=0,maxBottom=HEADER;
+ for(const month of months){
+  const idx=Number(month.slice(0,4))*12+Number(month.slice(5,7))-1;
+  const base=HEADER+(latestIndex-idx)*MONTH_PX+extra;
+  monthTops.set(month,base);
+  const group=arr.filter(a=>monthKey(firstDate.get(a.id))===month)
+   .sort((a,b)=>firstDate.get(b.id).localeCompare(firstDate.get(a.id))||a.title.localeCompare(b.title));
+  let monthBottom=base;
   for(const a of group){
-   const groupCards=byId.get(a.id)||[];
-   if(!groupCards.length)continue;
-   // Measure every copy after the cards have been rendered; use the tallest copy
-   // so a crossover has one common top and enough vertical room in every column.
-   const h=Math.ceil(Math.max(...groupCards.map(card=>Math.max(card.getBoundingClientRect().height,card.scrollHeight+2))));
-   groupCards.forEach(card=>{
-    card.style.top=cursor+"px";
-    card.style.height=h+"px";
-    card.style.zIndex="1";
-   });
-   cursor+=h+24;
+   const copies=byId.get(a.id)||[];if(!copies.length)continue;
+   const h=Math.ceil(Math.max(...copies.map(card=>Math.max(card.getBoundingClientRect().height,card.scrollHeight+2))));
+   const date=firstDate.get(a.id),day=Number(date.slice(8,10));
+   const daysInMonth=new Date(Date.UTC(Number(month.slice(0,4)),Number(month.slice(5,7)),0)).getUTCDate();
+   const dateTop=base+((day-1)/daysInMonth)*MONTH_PX;
+   let top=dateTop;
+   for(const lane of a.lanes)if(active.has(lane)&&bottoms[lane]!==-Infinity)top=Math.max(top,bottoms[lane]+GAP);
+   copies.forEach(card=>{card.style.top=top+"px";card.style.height=h+"px";card.style.zIndex="1"});
+   for(const lane of a.lanes)if(active.has(lane))bottoms[lane]=top+h;
+   monthBottom=Math.max(monthBottom,top+h);maxBottom=Math.max(maxBottom,top+h+GAP);
   }
-  if(cursor>yearStart){
-   labels.push({year,top:70+cursor-12});
-   cursor+=28;
-  }
+  yearTops.set(month.slice(0,4),yearTops.has(month.slice(0,4))?Math.min(yearTops.get(month.slice(0,4)),base):base);
+  // If cards need more room than this month provides, stretch the time scale
+  // from this point onward; older months are shifted down by the extra space.
+  const nextBase=base+MONTH_PX;
+  const added=Math.max(0,monthBottom+GAP-nextBase);
+  extra+=added;
  }
- for(const item of labels){
-  const e=document.createElement("div");
-  e.className="year";
-  e.style.top=item.top+"px";
-  e.style.zIndex="0";
-  e.innerHTML="<span>"+item.year+"</span>";
-  t.appendChild(e);
+ for(const month of months){
+  const e=document.createElement("div");e.className="month-mark";
+  e.style.top=monthTops.get(month)+"px";
+  const label=new Date(Date.UTC(Number(month.slice(0,4)),Number(month.slice(5,7))-1,1)).toLocaleDateString("it-IT",{month:"short",timeZone:"UTC"});
+  e.innerHTML='<span>'+label+'</span>';t.appendChild(e);
  }
- // The columns start below the timeline's 70px header padding.
- t.style.height=(70+cursor+40)+"px";
-}function packTimeline(arr){const timeline=document.querySelector(".timeline");if(!timeline)return;const bottoms={main:-Infinity,corps:-Infinity,dc:-Infinity,lanterns:-Infinity};const ordered=[...arr].sort((a,b)=>b.start.localeCompare(a.start)||b.end.localeCompare(a.end)||a.title.localeCompare(b.title));let maxBottom=timeline.clientHeight;for(const a of ordered){const cards=[...timeline.querySelectorAll('[data-arc="'+a.id+'"]')];if(!cards.length)continue;const target=yDate(a.end);let top=target;for(const lane of a.lanes)if(active.has(lane))top=Math.max(top,(bottoms[lane]===-Infinity?target:bottoms[lane]+14));const cardHeight=Math.max(...cards.map(c=>c.getBoundingClientRect().height));cards.forEach(c=>c.style.top=top+"px");for(const lane of a.lanes)if(active.has(lane))bottoms[lane]=top+cardHeight;maxBottom=Math.max(maxBottom,top+cardHeight+40);}timeline.style.height=maxBottom+"px";}
+ for(const [year,top] of yearTops){
+  const e=document.createElement("div");e.className="year";e.style.top=top+"px";e.style.zIndex="0";
+  e.innerHTML="<span>"+year+"</span>";t.appendChild(e);
+ }
+ t.style.height=(maxBottom+HEADER+30)+"px";
+}
+function packTimeline(arr){const timeline=document.querySelector(".timeline");if(!timeline)return;const bottoms={main:-Infinity,corps:-Infinity,dc:-Infinity,lanterns:-Infinity};const ordered=[...arr].sort((a,b)=>b.start.localeCompare(a.start)||b.end.localeCompare(a.end)||a.title.localeCompare(b.title));let maxBottom=timeline.clientHeight;for(const a of ordered){const cards=[...timeline.querySelectorAll('[data-arc="'+a.id+'"]')];if(!cards.length)continue;const target=yDate(a.end);let top=target;for(const lane of a.lanes)if(active.has(lane))top=Math.max(top,(bottoms[lane]===-Infinity?target:bottoms[lane]+14));const cardHeight=Math.max(...cards.map(c=>c.getBoundingClientRect().height));cards.forEach(c=>c.style.top=top+"px");for(const lane of a.lanes)if(active.has(lane))bottoms[lane]=top+cardHeight;maxBottom=Math.max(maxBottom,top+cardHeight+40);}timeline.style.height=maxBottom+"px";}
 function openArc(id){let a=db.arcs.find(x=>x.id===id),lan=a.lanes.map(x=>db.lanes[x]).join(" · "),ser=a.series.map(x=>'<li><b>'+x.title+'</b> — '+x.issues+' ('+db.lanes[x.lane]+')</li>').join(""),related=issues.filter(i=>i.arcId===a.id),issueHtml=related.length?'<h3 class="issue-heading">Albi catalogati</h3>'+related.map(i=>'<button class="issue-row" onclick="openIssue(\''+i.id+'\')">'+(i.cover?'<img src="'+i.cover+'" alt="Cover '+i.series+' #'+i.number+'">':'')+'<span><b>'+i.series+' #'+i.number+'</b><small>'+i.title+' · '+i.releaseDate+'</small></span><span>Apri →</span></button>').join(""):"";$("#dialogContent").innerHTML='<div class="detail"><div class="date">'+a.start.slice(0,4)+'–'+a.end.slice(0,4)+' · '+lan+'</div><h2>'+a.title+'</h2><p>'+a.description+'</p><b>Serie e albi coinvolti</b><ul>'+ser+'</ul><p><b>Personaggi:</b> '+(a.characters||[]).join(", ")+'</p>'+issueHtml+'</div>';$("#dialog").showModal()}
 function openIssue(id){const i=issues.find(x=>x.id===id);if(!i)return;const a=db.arcs.find(x=>x.id===i.arcId);const seriesIssues=issues.filter(x=>x.series===i.series).sort((x,y)=>x.releaseDate.localeCompare(y.releaseDate)||Number(x.number)-Number(y.number));const index=seriesIssues.findIndex(x=>x.id===i.id),prev=seriesIssues[index-1],next=seriesIssues[index+1];const nav='<div class="issue-navigation"><button '+(prev?'onclick="openIssue(&quot;'+prev.id+'&quot;)"':'disabled')+' aria-label="Albo precedente">← Precedente'+(prev?' · #'+prev.number:'')+'</button><button '+(next?'onclick="openIssue(&quot;'+next.id+'&quot;)"':'disabled')+' aria-label="Albo successivo">Successivo'+(next?' · #'+next.number:'')+' →</button></div>';$("#dialogContent").innerHTML='<div class="detail issue-detail"><button class="back-arc" onclick="openArc(&quot;'+i.arcId+'&quot;)">← Torna all’arco '+(a?a.title:"")+'</button><div class="issue-layout">' +(i.cover?'<img class="issue-cover" src="'+i.cover+'" alt="Cover '+i.series+' #'+i.number+'">':'') + '<div><div class="date">'+i.releaseDate+'</div><h2>'+i.series+' #'+i.number+'</h2><h3>'+i.title+'</h3><p><b>Story arc:</b> '+(a?a.title:"")+'</p><p><b>Writer:</b> '+(i.writer||[]).join(", ")+'</p><p><b>Penciller:</b> '+(i.penciller||[]).join(", ")+'</p><p><b>Characters:</b> '+(i.characters||[]).join(", ")+'</p></div></div>'+nav+'<h3>Detailed summary</h3><div class="summary-text">'+i.summary+'</div></div>'}
 $("#close").onclick=()=>$("#dialog").close();$("#dialog").addEventListener("click",event=>{if(event.target===$("#dialog"))$("#dialog").close()});load();
