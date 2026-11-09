@@ -16,15 +16,17 @@ function layoutTimeline(arr){
   firstDate.set(a.id,first?first.releaseDate:a.start);
  }
  const monthKey=s=>s.slice(0,7);
- const months=[...new Set(arr.map(a=>monthKey(firstDate.get(a.id))))].sort((a,b)=>b.localeCompare(a));
- if(!months.length){t.style.height="180px";return}
- const latest=months[0],latestIndex=Number(latest.slice(0,4))*12+Number(latest.slice(5,7))-1;
+ const arcMonths=arr.map(a=>monthKey(firstDate.get(a.id))).sort();
+ if(!arcMonths.length){t.style.height="180px";return}
+ const monthIndex=s=>Number(s.slice(0,4))*12+Number(s.slice(5,7))-1;
+ const latest=arcMonths[arcMonths.length-1],latestIndex=monthIndex(latest),oldestIndex=monthIndex(arcMonths[0]);
+ const months=Array.from({length:latestIndex-oldestIndex+1},(_,i)=>{const n=latestIndex-i,y=Math.floor(n/12),m=n%12+1;return y+"-"+String(m).padStart(2,"0")});
  const MONTH_PX=36,GAP=24,HEADER=70;
  const bottoms={main:-Infinity,corps:-Infinity,dc:-Infinity,lanterns:-Infinity};
  const monthTops=new Map(),yearTops=new Map();
  let extra=0,maxBottom=HEADER;
  for(const month of months){
-  const idx=Number(month.slice(0,4))*12+Number(month.slice(5,7))-1;
+  const idx=monthIndex(month);
   const base=HEADER+(latestIndex-idx)*MONTH_PX+extra;
   monthTops.set(month,base);
   const group=arr.filter(a=>monthKey(firstDate.get(a.id))===month)
